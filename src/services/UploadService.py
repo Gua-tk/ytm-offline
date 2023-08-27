@@ -5,7 +5,20 @@ import os
 
 class UploadService:
     def __init__(self):
-        self.ytmusic = ytmusicapi.YTMusic("secrets/browser.json")
+        print("CURRENT PATH:" + str(os.getcwd()))
+
+        absolute_current_file_path = os.path.abspath(__file__)
+
+        absolute_services_path = os.path.dirname(absolute_current_file_path)
+
+        absolute_src_path = os.path.dirname(absolute_services_path)
+
+        absolute_project_path = os.path.dirname(absolute_src_path)
+
+
+        self.ytmusic = ytmusicapi.YTMusic(os.path.join(absolute_project_path, "secrets/browser.json"))
+        with open("fast", "w+") as t:
+            t.write("olsaaaa")
 
     def upload_audio(self, audio_path):
         upload_info = self.ytmusic.upload_song(audio_path)
