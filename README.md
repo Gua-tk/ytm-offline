@@ -10,3 +10,11 @@ venv/bin/python3 -m pip install --upgrade pip
 venv/bin/python3 -m pip install -r requirements.txt
 venv/bin/python3 src/main.py
 ```
+
+### Docker Usage
+```shell
+sudo docker build -t axlfc/ytm-offline:latest . &&  sudo docker push axlfc/ytm-offline:latest && sudo docker-compose down && sudo docker-compose up -d
+```
+
+
+sudo docker compose up -d
