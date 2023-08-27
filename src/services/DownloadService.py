@@ -7,6 +7,10 @@ class DownloadService:
     def __init__(self):
         pass
 
+    def get_playlist_title(self, url):
+        info = yt.YoutubeDL().extract_info(url, download=False)
+        return info.get('title', 'unknown_playlist')
+
     def audio_options(self, codec, output_directory):
         return {
             'format': 'bestaudio/best',
@@ -31,8 +35,10 @@ class DownloadService:
         }
 
     def download_audio(self, url, output_directory=".", codec="mp3"):
-        with yt.YoutubeDL(self.audio_options(codec, output_directory)) as ydl:
+        audio_options = self.audio_options(codec, output_directory)
+        with yt.YoutubeDL(audio_options) as ydl:
             ydl.download([url])
+
 
     def download_audio_playlist(self, url, output_directory=".", codec="mp3"):
         with yt.YoutubeDL(self.audio_playlist_options(codec, output_directory)) as ydl:
