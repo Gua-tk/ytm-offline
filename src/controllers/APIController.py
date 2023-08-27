@@ -5,10 +5,12 @@ import uuid
 from flask import Flask, request, jsonify, send_file
 
 from src.services.DownloadService import DownloadService
+from src.services.CompressionService import CompressionService
 import os
 
 app = Flask(__name__)
 ds = DownloadService()
+cs = CompressionService()
 
 download_path = os.path.join(os.path.dirname(os.path.dirname(app.root_path)), "downloads")
 
@@ -25,7 +27,9 @@ def download_playlist():
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
     ds.download_audio_playlist(playlist_url, current_download_path)
-    return playlist_url
+    directory_name = ds.get_playlist_title(playlist_url)
+    cs.zip_folder(os.path.join(current_download_path, directory_name), os.path.join(current_download_path, directory_name + ".zip"))
+    return send_file(os.path.join(current_download_path, directory_name + ".zip"), as_attachment=True)
 
 
 @app.route('/audio', methods=['POST'])
