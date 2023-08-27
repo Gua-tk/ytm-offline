@@ -35,11 +35,15 @@ class DownloadService:
         }
 
     def download_audio(self, url, output_directory=".", codec="mp3"):
+        file_name = self.get_playlist_title(url) + ".mp3"
         audio_options = self.audio_options(codec, output_directory)
         with yt.YoutubeDL(audio_options) as ydl:
             ydl.download([url])
+        return file_name
 
 
     def download_audio_playlist(self, url, output_directory=".", codec="mp3"):
+        file_directory = self.get_playlist_title(url)
         with yt.YoutubeDL(self.audio_playlist_options(codec, output_directory)) as ydl:
             ydl.download([url])
+        return file_directory
