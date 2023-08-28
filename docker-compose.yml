@@ -5,7 +5,7 @@ services:
     image: aleixmt/ytm-offline:latest
     ports:
       - "0.0.0.0:5000:5000"
-    volumes:  # Mount secret files (dataverseKey.txt and signalsKey.txt)
+    volumes:
       - ./secrets:/usr/src/app/secrets
     restart: unless-stopped
     stdin_open: true
