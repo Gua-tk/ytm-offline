@@ -30,7 +30,7 @@ venv/bin/python3 src/main.py
 
 ### Docker Usage
 ```shell
-sudo docker build -t axlfc/ytm-offline:latest . &&  sudo docker push axlfc/ytm-offline:latest && sudo docker-compose down && sudo docker-compose up -d
+sudo docker build -t aleixmt/ytm-offline:latest . &&  sudo docker push aleixmt/ytm-offline:latest && sudo docker-compose down && sudo docker-compose up -d
 ```
 
 
