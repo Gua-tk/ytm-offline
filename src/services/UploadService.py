@@ -14,9 +14,15 @@ class UploadService:
         absolute_src_path = os.path.dirname(absolute_services_path)
 
         absolute_project_path = os.path.dirname(absolute_src_path)
+        token_absolute_path = os.path.join(absolute_project_path, "secrets/browser.json")
+        headers_absolute_path = os.path.join(absolute_project_path, "secrets/headers.txt")
 
+        if os.path.isfile(token_absolute_path):
+            self.ytmusic = ytmusicapi.YTMusic(token_absolute_path)
+        elif os.path.isfile(headers_absolute_path):
+            ytmusicapi.setup(filepath=token_absolute_path, headers_raw="".join(open(headers_absolute_path).readlines()))
+            self.ytmusic = ytmusicapi.YTMusic(token_absolute_path)
 
-        self.ytmusic = ytmusicapi.YTMusic(os.path.join(absolute_project_path, "secrets/browser.json"))
         with open("fast", "w+") as t:
             t.write("olsaaaa")
 
