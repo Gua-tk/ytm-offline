@@ -3,7 +3,8 @@
 import ytmusicapi
 import os
 
-class UploadService:
+
+class YTMusicService:
     def __init__(self):
         print("CURRENT PATH:" + str(os.getcwd()))
 
@@ -36,6 +37,11 @@ class UploadService:
             file_path = os.path.join(playlist_directory, filename)
             print("UPLOADING " + filename)
             upload_infos.append(self.upload_audio(file_path))
-
-
         return upload_infos
+
+    def create_playlist(self, playlist_title, playlist_description):
+        response = self.ytmusic.create_playlist(playlist_title, playlist_description)
+        return response['playlistId']
+
+    def add_songs_to_playlist(self, playlist_id, video_ids):
+        self.ytmusic.add_playlist_items(playlist_id, video_ids)

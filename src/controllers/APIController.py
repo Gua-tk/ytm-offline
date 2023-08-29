@@ -2,25 +2,21 @@
 # -*- coding: utf-8 -*-
 import uuid
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, send_file
 import os
 
-from src.services.UploadService import UploadService
+from src.services.YTMusicService import YTMusicService
 from src.services.DownloadService import DownloadService
 from src.services.CompressionService import CompressionService
 
 app = Flask(__name__)
 ds = DownloadService()
 cs = CompressionService()
-us = UploadService()
+us = YTMusicService()
 
 download_path = os.path.join(os.path.dirname(os.path.dirname(app.root_path)), "downloads")
 
 
-'''# Read all
-@app.route('/playlist/<str:playlist_url>', methods=['POST'])
-def get_items():
-    return jsonify(items), 200'''
 # https://youtube.com/playlist?list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb&si=BmAWXxAFVAa_gg86
 @app.route('/playlist', methods=['POST'])
 def download_playlist():
@@ -63,6 +59,19 @@ def upload_playlist():
     print("DOWNLOADING FINISHED. STARTING UPLOAD<")
     upload_infos = us.upload_playlist(os.path.join(current_download_path, directory_name))
     return "\n".join(upload_infos)
+
+
+@app.route('/playlist/upload_to_playlist', methods=['POST'])
+def upload_to_playlist():
+    data = request.json
+    playlist_url = data['playlist_url']
+    request_uuid = uuid.uuid4()
+    current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
+    directory_name = ds.download_audio_playlist(playlist_url, current_download_path)
+    print("DOWNLOADING FINISHED. STARTING UPLOAD<")
+    upload_infos = us.upload_playlist(os.path.join(current_download_path, directory_name))
+    title, description = ds.download_playlist_data(playlist_url)
+    us.create_playlist(title, description)
 
 
 @app.route('/', methods=['GET'])
