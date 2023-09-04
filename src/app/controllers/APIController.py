@@ -4,12 +4,15 @@ import uuid
 
 from flask import Flask, request, send_file
 import os
+from flask_restx import Api
 
-from src.services.YTMusicService import YTMusicService
-from src.services.DownloadService import DownloadService
-from src.services.CompressionService import CompressionService
+from src.app.services.YTMusicService import YTMusicService
+from src.app.services.DownloadService import DownloadService
+from src.app.services.CompressionService import CompressionService
 
-app = Flask(__name__)
+app = Flask(__name__)  # Initialize Flask app
+api = Api(app, doc='/swagger/')  # Specify the path to Swagger UI documentation
+
 ds = DownloadService()
 cs = CompressionService()
 us = YTMusicService()
@@ -19,7 +22,12 @@ download_path = os.path.join(os.path.dirname(os.path.dirname(app.root_path)), "d
 
 # https://youtube.com/playlist?list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb&si=BmAWXxAFVAa_gg86
 @app.route('/playlist', methods=['POST'])
+@api.doc(params={'name': 'The name to greet'})
 def download_playlist():
+    """
+    Downloads a playlist from youtube as a set of .mp3 files compressed into a single .zip file.
+    :return: a .zip file containing all the .mp3 files of the supplied playlist.
+    """
     data = request.json
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
@@ -79,5 +87,4 @@ def hello():
     return 'Holaaaa MAMAMAA'
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+
