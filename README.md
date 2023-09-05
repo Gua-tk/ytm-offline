@@ -35,3 +35,6 @@ sudo docker build -t aleixmt/ytm-offline:latest . &&  sudo docker push aleixmt/y
 
 
 sudo docker compose up -d
+
+### Example of playlist
+https://youtube.com/playlist?list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb&si=BmAWXxAFVAa_gg86
