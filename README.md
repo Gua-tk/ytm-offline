@@ -1,4 +1,7 @@
 # ytm-offline
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd11bee5a7b4412a93a13b46dfbee2fa)](https://app.codacy.com/gh/ytm-manager/ytm-manager-backend?utm_source=github.com&utm_medium=referral&utm_content=ytm-manager/ytm-manager-backend&utm_campaign=Badge_Grade)
+
 Program to download and reupload music from youtube videos, so you can lock your phone while listening to youtube music for free.
 
 ### TODO:
