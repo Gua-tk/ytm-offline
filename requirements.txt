@@ -1,10 +1,7 @@
-ytmusicapi
-yt-dlp
-
-flask
-flask-restx
+flasgger==0.9.7.1
+Flask==2.3.3
+flask_restx==1.1.0
 flask_sqlalchemy==3.1.0
+yt_dlp==2023.7.6
+ytmusicapi==1.2.1
 
-flasgger
-
-pipreqs
