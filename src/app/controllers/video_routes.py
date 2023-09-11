@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api, Resource, fields
-from src.app.services.VideoService import VideoService
+from src.app.services.YoutubeService import YoutubeService
 
 video_bp = Blueprint('video', __name__, url_prefix='/video')
 api = Api(video_bp, doc='/doc', title='Video REST API', version='1.0')
@@ -12,7 +12,7 @@ video_fields = api.model('Video', {
     'URL': fields.String(required=True, description='Youtube URL to watch the video'),
 })
 
-videoService = VideoService()
+videoService = YoutubeService()
 
 
 @api.route('/')

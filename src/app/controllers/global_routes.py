@@ -7,16 +7,16 @@ from flask import Blueprint
 from flask import request, send_file
 from flask_restx import Api, Resource
 
-from src.app.services.PlaylistService import PlaylistService
-from src.app.services.VideoService import VideoService
+from src.app.services.YoutubeMusicService import YoutubeMusicService
+from src.app.services.YoutubeService import YoutubeService
 from src.app.services.CompressionService import CompressionService
 
 global_bp = Blueprint('global', __name__, url_prefix='/api')
 api = Api(global_bp, doc='/doc', title='Global REST API', version='1.0')
 
-videoService = VideoService()
+videoService = YoutubeService()
 compressionService = CompressionService()
-playlistService = PlaylistService()
+playlistService = YoutubeMusicService()
 
 root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 download_path = os.path.join(root_path, "downloads")

@@ -8,7 +8,7 @@ from src.app.models.Playlist import Playlist
 from src.app.extensions import db
 
 
-class PlaylistService:
+class YoutubeMusicService:
 
     def __init__(self):
         absolute_current_file_path = os.path.abspath(__file__)

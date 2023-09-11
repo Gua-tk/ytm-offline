@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api, Resource, fields
-from src.app.services.PlaylistService import PlaylistService
+from src.app.services.YoutubeMusicService import YoutubeMusicService
 
 playlist_bp = Blueprint('playlist', __name__, url_prefix='/playlist')
 api = Api(playlist_bp, doc='/doc', title='Playlist REST API', version='1.0')
@@ -12,7 +12,7 @@ playlist_fields = api.model('Playlist', {
     'URL': fields.String(required=True, description='Youtube URL to watch the playlist'),
 })
 
-playlistService = PlaylistService()
+playlistService = YoutubeMusicService()
 
 
 @api.route('/')

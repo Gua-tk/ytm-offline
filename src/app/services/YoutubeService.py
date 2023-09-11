@@ -6,7 +6,7 @@ from src.app.models.Video import Video
 from src.app.extensions import db
 
 
-class VideoService:
+class YoutubeService:
     def __init__(self):
         pass
 
