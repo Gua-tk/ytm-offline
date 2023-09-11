@@ -2,8 +2,8 @@ from flask import Blueprint
 from flask_restx import Api, Resource, fields
 from src.app.services.YoutubeMusicService import YoutubeMusicService
 
-playlist_bp = Blueprint('playlist', __name__, url_prefix='/playlist')
-api = Api(playlist_bp, doc='/doc', title='Playlist REST API', version='1.0')
+youtubeMusic_bp = Blueprint('playlist', __name__, url_prefix='/playlist')
+api = Api(youtubeMusic_bp, doc='/doc', title='Playlist REST API', version='1.0')
 
 playlist_fields = api.model('Playlist', {
     'id': fields.Integer(readOnly=True, description='The unique identifier of a playlist in our db'),
@@ -12,7 +12,7 @@ playlist_fields = api.model('Playlist', {
     'URL': fields.String(required=True, description='Youtube URL to watch the playlist'),
 })
 
-playlistService = YoutubeMusicService()
+youtubeMusicService = YoutubeMusicService()
 
 
 @api.route('/')
@@ -20,7 +20,7 @@ class PlaylistList(Resource):
     @api.marshal_list_with(playlist_fields)
     def get(self):
         """List all playlists"""
-        playlists = playlistService.get_all_playlists()
+        playlists = youtubeMusicService.get_all_playlists()
         return playlists
 
     @api.expect(playlist_fields)
@@ -28,7 +28,7 @@ class PlaylistList(Resource):
     def post(self):
         """Create a new playlist"""
         data = api.payload
-        playlist = playlistService.save_playlist(data)
+        playlist = youtubeMusicService.save_playlist(data)
         return playlist, 201
 
 
@@ -39,7 +39,7 @@ class PlaylistDetail(Resource):
     @api.marshal_with(playlist_fields)
     def get(self, playlist_id):
         """Get a playlist by ID"""
-        playlist = playlistService.get_playlist_by_id(playlist_id)
+        playlist = youtubeMusicService.get_playlist_by_id(playlist_id)
         if playlist is None:
             api.abort(404, message="Playlist not found")
         return playlist
@@ -47,8 +47,8 @@ class PlaylistDetail(Resource):
     @api.response(204, 'Playlist deleted')
     def delete(self, playlist_id):
         """Delete a playlist by ID"""
-        playlist = playlistService.get_playlist_by_id(playlist_id)
+        playlist = youtubeMusicService.get_playlist_by_id(playlist_id)
         if playlist is None:
             api.abort(404, message="Playlist not found")
-        playlistService.delete_playlist(playlist)
+        youtubeMusicService.delete_playlist(playlist)
         return '', 204

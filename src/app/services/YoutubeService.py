@@ -10,6 +10,24 @@ class YoutubeService:
     def __init__(self):
         pass
 
+    def download_audio_playlist(self, url, output_directory=".", codec="mp3"):
+        file_directory = self.get_playlist_title(url)
+        with yt.YoutubeDL(self.audio_playlist_options(codec, output_directory)) as ydl:
+            ydl.download([url])
+        return file_directory
+
+    def download_playlist_data(self, playlist_url):
+        # Extract information about the playlist
+        playlist_info = yt.YoutubeDL().extract_info(playlist_url, download=False)
+
+        # Get playlist title and description
+        return playlist_info.get('title', 'Untitled Playlist'), playlist_info.get('description',
+                                                                                  'No description available')
+
+    def get_playlist_title(self, url):
+        info = yt.YoutubeDL().extract_info(url, download=False)
+        return info.get('title', 'unknown_playlist')
+
     def download_audio(self, url, output_directory=".", codec="mp3"):
         file_name = self.get_video_title(url) + ".mp3"
         audio_options = self.audio_options(codec, output_directory)
@@ -48,3 +66,15 @@ class YoutubeService:
     def delete_video(self, video):
         db.session.delete(video)
         db.session.commit()
+
+    def audio_playlist_options(self, codec, output_directory):
+        return {
+            'yes_playlist': True,
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': codec,
+                'preferredquality': '192',
+            }],
+            'outtmpl': f'{output_directory}/%(playlist_title)s/%(title)s.%(ext)s',
+        }
