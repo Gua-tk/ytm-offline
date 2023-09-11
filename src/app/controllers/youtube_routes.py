@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_restx import Api, Resource, fields
 from src.app.services.YoutubeService import YoutubeService
 
-youtube_bp = Blueprint('video', __name__, url_prefix='/video')
+youtube_bp = Blueprint('video', __name__, url_prefix='/api/youtube')
 api = Api(youtube_bp, doc='/doc', title='Video REST API', version='1.0')
 
 video_fields = api.model('Video', {

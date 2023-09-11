@@ -11,7 +11,7 @@ from src.app.services.YoutubeMusicService import YoutubeMusicService
 from src.app.services.YoutubeService import YoutubeService
 from src.app.services.CompressionService import CompressionService
 
-global_bp = Blueprint('global', __name__, url_prefix='/api')
+global_bp = Blueprint('global', __name__, url_prefix='/api/global')
 api = Api(global_bp, doc='/doc', title='Global REST API', version='1.0')
 
 videoService = YoutubeService()
@@ -84,4 +84,4 @@ def upload_to_playlist():
 
 @global_bp.route('/hello', methods=['GET'])
 def hello():
-    return 'hello world'
+    return 'hello world\n'

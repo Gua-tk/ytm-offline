@@ -1,1 +1,5 @@
-curl -X POST localhost:5000 
+
+hello()
+{
+  curl localhost:5000/api/global/hello
+}

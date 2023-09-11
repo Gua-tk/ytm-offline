@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_restx import Api, Resource, fields
 from src.app.services.YoutubeMusicService import YoutubeMusicService
 
-youtubeMusic_bp = Blueprint('playlist', __name__, url_prefix='/playlist')
+youtubeMusic_bp = Blueprint('playlist', __name__, url_prefix='/api/youtube_music')
 api = Api(youtubeMusic_bp, doc='/doc', title='Playlist REST API', version='1.0')
 
 playlist_fields = api.model('Playlist', {
