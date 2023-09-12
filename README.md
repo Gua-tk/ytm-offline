@@ -370,3 +370,5 @@ The development of the ***YouTube Music Manager*** backend was possible thanks t
 [pipreqs-url]: https://pypi.org/project/pipreqs/
 [docker-shield]: https://img.shields.io/badge/docker-24.0.2_build_cb74dfc-grey?style=for-the-badge&logo=docker
 [docker-url]: https://www.docker.com/
+
+
