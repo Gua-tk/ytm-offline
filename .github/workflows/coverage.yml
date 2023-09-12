@@ -1,20 +1,4 @@
-name: coverage
-
-# Trigger event on every push / delete event, only in master branch
-on:
-  push:
-    branches:
-      - "master"
-  delete:
-    branches:
-      - "master"
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+- name: Upload coverage reports to Codecov
+  uses: codecov/codecov-action@v3
+  env:
+    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
