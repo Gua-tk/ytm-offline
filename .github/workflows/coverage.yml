@@ -1,8 +1,5 @@
 name: coverage
 
-# Trigger event on every push / delete event, no matter the branch
-# on: [push, delete]
-
 # Trigger event on every push / delete event, only in master branch
 on:
   push:
