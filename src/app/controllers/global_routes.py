@@ -32,7 +32,8 @@ def download_playlist():
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
-    directory_name = playlistService.download_audio_playlist(playlist_url, current_download_path)
+    directory_name = videoService.download_audio_playlist(playlist_url, current_download_path)
+    print("Directory name for playlist is " + directory_name)
     compressionService.zip_folder(os.path.join(current_download_path, directory_name),
                                   os.path.join(current_download_path, directory_name + ".zip"))
     return send_file(os.path.join(current_download_path, directory_name + ".zip"), as_attachment=True)
@@ -64,10 +65,10 @@ def upload_playlist():
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
-    directory_name = playlistService.download_audio_playlist(playlist_url, current_download_path)
+    directory_name = videoService.download_audio_playlist(playlist_url, current_download_path)
     print("DOWNLOADING FINISHED. STARTING UPLOAD<")
     upload_infos = playlistService.upload_playlist(os.path.join(current_download_path, directory_name))
-    return "\n".join(upload_infos)
+    return "".join(str(upload_infos)) + "\n"
 
 
 @global_bp.route('/uploadToPlaylist', methods=['POST'])

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import yt_dlp as yt
+from yt_dlp.utils import ExtractorError
 
 from src.app.models.Video import Video
 from src.app.extensions import db
@@ -10,14 +11,20 @@ class YoutubeService:
     def __init__(self):
         pass
 
-    def download_audio_playlist(self, url, output_directory=".", codec="mp3"):
+    def download_audio_playlist(self, url, output_directory, codec="mp3"):
         file_directory = self.get_playlist_title(url)
         with yt.YoutubeDL(self.audio_playlist_options(codec, output_directory)) as ydl:
-            ydl.download([url])
+            try:
+                ydl.download([url])
+            except ExtractorError as e:
+                print("An error happened during the download of the audio " + url)
+                print(e)
+
         return file_directory
 
     def download_playlist_data(self, playlist_url):
         # Extract information about the playlist
+        # TODO this line fails if there is a private video in the playlist
         playlist_info = yt.YoutubeDL().extract_info(playlist_url, download=False)
 
         # Get playlist title and description
