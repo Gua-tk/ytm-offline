@@ -3,6 +3,8 @@ FROM python:3
 
 EXPOSE 5000
 
+RUN apt-get update && apt-get install -y ffmpeg
+
 # Set the working directory
 WORKDIR /usr/src/app
 
