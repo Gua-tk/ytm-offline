@@ -14,4 +14,4 @@ ENV PYTHONPATH="${PYTHONPATH}:/usr/src/app"
 
 COPY ./src  /usr/src/app
 
-CMD [ "python", "./src/controllers/APIController.py" ]
+CMD [ "python", "./src/app/main.py" ]
