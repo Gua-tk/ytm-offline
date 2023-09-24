@@ -29,10 +29,10 @@ TEST_DIR=$(dirname "$(realpath "$0")")
 DOWNLOADS_TEST_DIR="${TEST_DIR}/downloads"
 mkdir -p "${TEST_DIR}/downloads"
 
-#test_hello
+test_hello
 #test_download_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA1WYUc04ieKU2Z7cH893sQ7
 #test_download_playlist https://youtu.be/3tw2P65wv5E?si=nmZ7QaRCZb5yg-MY
 #test_download_audio
-#test_upload_audio
+test_upload_audio
 #test_upload_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA1WYUc04ieKU2Z7cH893sQ7
 test_upload_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA0hCo27eqw1eB6lLK6Fu-9Z

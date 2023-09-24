@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   ytm-offline:
-    image: aleixmt/ytm-offline:latest
+    image: aleixmt/ytm-manager-backend:latest
     ports:
       - "0.0.0.0:5000:5000"
     volumes:
