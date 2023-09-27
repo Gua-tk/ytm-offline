@@ -71,6 +71,15 @@ def upload_playlist():
     return "".join(str(upload_infos)) + "\n"
 
 
+@global_bp.route('/uploadReceivedAudio', methods=['POST'])
+def upload_received_audio():
+    if 'file' not in request.files:
+        abort(400)
+
+    uploaded_file = request.files['file']
+    print(uploaded_file.filename)
+
+
 @global_bp.route('/uploadToPlaylist', methods=['POST'])
 def upload_to_playlist():
     data = request.json

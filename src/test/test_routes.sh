@@ -35,4 +35,4 @@ test_hello
 #test_download_audio
 test_upload_audio
 #test_upload_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA1WYUc04ieKU2Z7cH893sQ7
-test_upload_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA0hCo27eqw1eB6lLK6Fu-9Z
+test_upload_playlist https://www.youtube.com/watch?v=3tw2P65wv5E&list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb
