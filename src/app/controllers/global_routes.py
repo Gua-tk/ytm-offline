@@ -11,12 +11,16 @@ from src.app.services.YoutubeMusicService import YoutubeMusicService
 from src.app.services.YoutubeService import YoutubeService
 from src.app.services.CompressionService import CompressionService
 
+from src.app.services.UserService import UserService
+
 global_bp = Blueprint('global', __name__, url_prefix='/api/global')
 api = Api(global_bp, doc='/doc', title='Global REST API', version='1.0')
 
 videoService = YoutubeService()
 compressionService = CompressionService()
 playlistService = YoutubeMusicService()
+
+userService = UserService()
 
 root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 download_path = os.path.join(root_path, "downloads")
@@ -74,7 +78,8 @@ def upload_playlist():
 @global_bp.route('/uploadReceivedAudio', methods=['POST'])
 def upload_received_audio():
     if 'file' not in request.files:
-        abort(400)
+        return 400
+    print("FILE RECEIVED")
 
     uploaded_file = request.files['file']
     print(uploaded_file.filename)
@@ -90,6 +95,22 @@ def upload_to_playlist():
     upload_infos = playlistService.upload_playlist(os.path.join(current_download_path, directory_name))
     title, description = playlistService.download_playlist_data(playlist_url)
     playlistService.save_playlist({'title': title, 'description': description})
+
+
+@global_bp.route('/register', methods=['POST'])
+def register_user():
+    data = request.get_json()
+    userService.create_user(data["email"], data["password"])
+    return "DONE", 201
+
+
+@global_bp.route('/login', methods=['POST'])
+def log_in():
+    data = request.get_json()
+    print("LOG IN EMAIL:\t", data["email"])
+    print("LOG IN PASSWORD:\t", data["password"])
+    userService.query_filter_by_email(data["email"], data["password"])
+    return "DONE", 201
 
 
 @global_bp.route('/hello', methods=['GET'])
