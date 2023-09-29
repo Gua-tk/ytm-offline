@@ -97,22 +97,6 @@ def upload_to_playlist():
     playlistService.save_playlist({'title': title, 'description': description})
 
 
-@global_bp.route('/register', methods=['POST'])
-def register_user():
-    data = request.get_json()
-    userService.create_user(data["email"], data["password"])
-    return "DONE", 201
-
-
-@global_bp.route('/login', methods=['POST'])
-def log_in():
-    data = request.get_json()
-    print("LOG IN EMAIL:\t", data["email"])
-    print("LOG IN PASSWORD:\t", data["password"])
-    userService.query_filter_by_email(data["email"], data["password"])
-    return "DONE", 201
-
-
 @global_bp.route('/hello', methods=['GET'])
 def hello():
     return 'hello world\n'

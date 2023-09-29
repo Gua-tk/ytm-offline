@@ -24,15 +24,21 @@ test_upload_playlist()
   curl -X POST -H "Content-Type: application/json" localhost:5000/api/global/uploadPlaylist -d "{\"playlist_url\": \"$1\"}"
 }
 
+test_login()
+{
+  curl -X POST -H "Content-Type: application/json" localhost:5000/api/user/login -d "{\"email\": \"$1\", \"password\": \"$2\"}"
+}
+
 set -e
 TEST_DIR=$(dirname "$(realpath "$0")")
 DOWNLOADS_TEST_DIR="${TEST_DIR}/downloads"
 mkdir -p "${TEST_DIR}/downloads"
 
-test_hello
+#test_hello
 #test_download_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA1WYUc04ieKU2Z7cH893sQ7
 #test_download_playlist https://youtu.be/3tw2P65wv5E?si=nmZ7QaRCZb5yg-MY
 #test_download_audio
-test_upload_audio
+#test_upload_audio
 #test_upload_playlist https://www.youtube.com/playlist?list=PLsS6gopj1BA1WYUc04ieKU2Z7cH893sQ7
-test_upload_playlist https://www.youtube.com/watch?v=3tw2P65wv5E&list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb
+#test_upload_playlist https://www.youtube.com/watch?v=3tw2P65wv5E&list=PLvEI0iOxif017-fv4P0ApFmzRI-vWBPvb
+test_login "ytm@ytm.com" "changeit"
