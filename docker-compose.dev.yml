@@ -8,6 +8,8 @@ services:
     volumes:
       - ./secrets:/usr/src/app/secrets
     restart: unless-stopped
+    stdin_open: true
+    tty: true
 
   postgres-db:
     image: postgres
@@ -20,4 +22,3 @@ services:
       - POSTGRES_DB=ytm_backend
     ports:
       - "0.0.0.0:5432:5432"
-    restart: unless-stopped

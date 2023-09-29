@@ -4,7 +4,7 @@ import yt_dlp as yt
 from yt_dlp.utils import ExtractorError
 
 from src.app.models.Video import Video
-from src.app.extensions import db
+from src.app.db import db
 
 
 class YoutubeService:

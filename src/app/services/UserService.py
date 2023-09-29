@@ -1,5 +1,5 @@
-from src.app.extensions import db
-from src.app.models.User import User
+from src.app.db import db
+from src.app.models.UserModel import UserModel
 
 
 class UserService:
@@ -7,12 +7,12 @@ class UserService:
         pass
 
     def create_user(self, email, password):
-        user = User(email=email, password=password)
+        user = UserModel(email=email, password=password)
         db.session.add(user)
         db.session.commit()
 
     def query_filter_by_email(self, email, password):
-        user = User.query.filter_by(email=email).first()
+        user = UserModel.query.filter_by(email=email).first()
         if user is None:
             return 401
 

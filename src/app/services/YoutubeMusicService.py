@@ -4,7 +4,7 @@ import os
 import ytmusicapi
 
 from src.app.models.Playlist import Playlist
-from src.app.extensions import db
+from src.app.db import db
 
 
 class YoutubeMusicService:

@@ -1,4 +1,4 @@
-from src.app.extensions import db
+from src.app.db import db
 
 
 class Video(db.Model):
