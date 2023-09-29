@@ -26,8 +26,15 @@ def register_user():
 @user_bp.route('/login', methods=['POST'])
 def log_in():
     data = request.get_json()
-    print("LOG IN EMAIL:\t", data["email"])
-    print("LOG IN PASSWORD:\t", data["password"])
-    userService.query_filter_by_email(data["email"], data["password"])
-    return "DONE", 201
-
+    email = data["email"]
+    password = data["password"]
+    print("LOG IN EMAIL:\t", email)
+    print("LOG IN PASSWORD:\t", password)
+    user_model = userService.get_user(email)
+    if user_model is None:
+        return "User with email " + email + " does not exist in the database\n", 404
+    elif user_model.password.__eq__(password):
+        # TODO implement authentication for the front-end
+        return "Logged in", 200
+    else:
+        return "Incorrect password\n", 404

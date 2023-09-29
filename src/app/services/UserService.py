@@ -11,10 +11,5 @@ class UserService:
         db.session.add(user)
         db.session.commit()
 
-    def query_filter_by_email(self, email, password):
-        user = UserModel.query.filter_by(email=email).first()
-        if user is None:
-            return 401
-
-        if user.password != password:
-            return 401
+    def get_user(self, email):
+        return UserModel.query.filter_by(email=email).first()
