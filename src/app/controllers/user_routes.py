@@ -15,7 +15,6 @@ user_fields = api.model('User', {
 
 userService = UserService()
 
-
 @user_bp.route('/signup', methods=['POST'])
 def register_user():
     data = request.get_json()

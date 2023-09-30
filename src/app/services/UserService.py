@@ -7,9 +7,12 @@ class UserService:
         pass
 
     def create_user(self, email, password):
-        user = UserModel(email=email, password=password)
-        db.session.add(user)
-        db.session.commit()
+        if self.get_user(email) is None:
+            user = UserModel(email=email, password=password)
+            db.session.add(user)
+            db.session.commit()
+        else:
+            raise ValueError
 
     def get_user(self, email):
         user_model = UserModel.query.filter_by(email=email).first()
