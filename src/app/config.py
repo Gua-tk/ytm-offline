@@ -22,7 +22,3 @@ SQLALCHEMY_ECHO = True
 SQLALCHEMY_DATABASE_URI = "postgresql://" + postgres_username + ":" + postgres_password + "@postgres-db:5432" \
                                                                                            "/ytm_backend"
 
-print("url" + SQLALCHEMY_DATABASE_URI)
-# r"sqlite:///./db.sqlite "
-
-

@@ -19,8 +19,13 @@ userService = UserService()
 @user_bp.route('/signup', methods=['POST'])
 def register_user():
     data = request.get_json()
-    userService.create_user(data["email"], data["password"])
-    return "DONE", 201
+    email = data["email"]
+    password = data["password"]
+    user_model = userService.get_user(email)
+    if user_model is not None:
+        return "User with email " + email + " already exists in the database\n", 400
+    userService.create_user(email, password)
+    return "User created", 200
 
 
 @user_bp.route('/login', methods=['POST'])
@@ -35,6 +40,6 @@ def log_in():
         return "User with email " + email + " does not exist in the database\n", 404
     elif user_model.password.__eq__(password):
         # TODO implement authentication for the front-end
-        return "Logged in", 200
+        return "Logged in\n", 200
     else:
         return "Incorrect password\n", 404

@@ -1,5 +1,7 @@
 from flask import Blueprint
 from flask_restx import Api, Resource, fields
+
+from src.app.AppSingleton import auth
 from src.app.services.YoutubeService import YoutubeService
 
 youtube_bp = Blueprint('video', __name__, url_prefix='/api/youtube')
@@ -18,6 +20,7 @@ youtubeService = YoutubeService()
 @api.route('/')
 class VideoList(Resource):
     @api.marshal_list_with(video_fields)
+    @auth.login_required
     def get(self):
         """List all videos"""
         videos = youtubeService.get_all_videos()
@@ -25,6 +28,7 @@ class VideoList(Resource):
 
     @api.expect(video_fields)
     @api.marshal_with(video_fields, code=201)
+    @auth.login_required
     def post(self):
         """Create a new video"""
         data = api.payload
@@ -37,6 +41,7 @@ class VideoList(Resource):
 @api.response(404, 'Video not found')
 class VideoDetail(Resource):
     @api.marshal_with(video_fields)
+    @auth.login_required
     def get(self, video_id):
         """Get a video by ID"""
         video = youtubeService.get_video_by_id(video_id)
@@ -45,6 +50,7 @@ class VideoDetail(Resource):
         return video
 
     @api.response(204, 'Video deleted')
+    @auth.login_required
     def delete(self, video_id):
         """Delete a video by ID"""
         video = youtubeService.get_video_by_id(video_id)

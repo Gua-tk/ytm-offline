@@ -1,5 +1,7 @@
 from flask import Blueprint
 from flask_restx import Api, Resource, fields
+
+from src.app.AppSingleton import auth
 from src.app.services.YoutubeMusicService import YoutubeMusicService
 
 youtubeMusic_bp = Blueprint('playlist', __name__, url_prefix='/api/youtube_music')
@@ -18,6 +20,7 @@ youtubeMusicService = YoutubeMusicService()
 @api.route('/')
 class PlaylistList(Resource):
     @api.marshal_list_with(playlist_fields)
+    @auth.login_required
     def get(self):
         """List all playlists"""
         playlists = youtubeMusicService.get_all_playlists()
@@ -25,6 +28,7 @@ class PlaylistList(Resource):
 
     @api.expect(playlist_fields)
     @api.marshal_with(playlist_fields, code=201)
+    @auth.login_required
     def post(self):
         """Create a new playlist"""
         data = api.payload
@@ -37,6 +41,7 @@ class PlaylistList(Resource):
 @api.response(404, 'Playlist not found')
 class PlaylistDetail(Resource):
     @api.marshal_with(playlist_fields)
+    @auth.login_required
     def get(self, playlist_id):
         """Get a playlist by ID"""
         playlist = youtubeMusicService.get_playlist_by_id(playlist_id)
@@ -45,6 +50,7 @@ class PlaylistDetail(Resource):
         return playlist
 
     @api.response(204, 'Playlist deleted')
+    @auth.login_required
     def delete(self, playlist_id):
         """Delete a playlist by ID"""
         playlist = youtubeMusicService.get_playlist_by_id(playlist_id)

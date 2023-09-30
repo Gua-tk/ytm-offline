@@ -12,4 +12,8 @@ class UserService:
         db.session.commit()
 
     def get_user(self, email):
-        return UserModel.query.filter_by(email=email).first()
+        user_model = UserModel.query.filter_by(email=email).first()
+        print(user_model)
+        return user_model
+    
+

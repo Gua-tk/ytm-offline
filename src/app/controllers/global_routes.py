@@ -12,6 +12,7 @@ from src.app.services.YoutubeService import YoutubeService
 from src.app.services.CompressionService import CompressionService
 
 from src.app.services.UserService import UserService
+from src.app.AppSingleton import auth
 
 global_bp = Blueprint('global', __name__, url_prefix='/api/global')
 api = Api(global_bp, doc='/doc', title='Global REST API', version='1.0')
@@ -27,6 +28,7 @@ download_path = os.path.join(root_path, "downloads")
 
 
 @global_bp.route('/downloadPlaylist', methods=['POST'])
+@auth.login_required
 def download_playlist():
     """
     Downloads a playlist from youtube as a set of .mp3 files compressed into a single .zip file.
@@ -44,6 +46,7 @@ def download_playlist():
 
 
 @global_bp.route('/downloadAudio', methods=['POST'])
+@auth.login_required
 def download_audio():
     data = request.json
     audio_url = data['audio_url']
@@ -54,6 +57,7 @@ def download_audio():
 
 
 @global_bp.route('/uploadAudio', methods=['POST'])
+@auth.login_required
 def upload_audio():
     data = request.json
     audio_url = data['audio_url']
@@ -64,6 +68,7 @@ def upload_audio():
 
 
 @global_bp.route('/uploadPlaylist', methods=['POST'])
+@auth.login_required
 def upload_playlist():
     data = request.json
     playlist_url = data['playlist_url']
@@ -76,6 +81,7 @@ def upload_playlist():
 
 
 @global_bp.route('/uploadReceivedAudio', methods=['POST'])
+@auth.login_required
 def upload_received_audio():
     if 'file' not in request.files:
         return 400
@@ -86,6 +92,7 @@ def upload_received_audio():
 
 
 @global_bp.route('/uploadToPlaylist', methods=['POST'])
+@auth.login_required
 def upload_to_playlist():
     data = request.json
     playlist_url = data['playlist_url']
@@ -97,6 +104,13 @@ def upload_to_playlist():
     playlistService.save_playlist({'title': title, 'description': description})
 
 
+@global_bp.route('/secure_hello', methods=['GET'])
+@auth.login_required
+def secure_hello():
+    return 'hello world\n' + "Hello, {}!".format(auth.current_user())
+
+
 @global_bp.route('/hello', methods=['GET'])
 def hello():
-    return 'hello world\n'
+    return 'hello world\n' + "Hello, {}!".format(auth.current_user())
+
