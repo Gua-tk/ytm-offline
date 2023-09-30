@@ -15,6 +15,7 @@ user_fields = api.model('User', {
 
 userService = UserService()
 
+
 @user_bp.route('/signup', methods=['POST'])
 def register_user():
     data = request.get_json()
@@ -24,7 +25,7 @@ def register_user():
     if user_model is not None:
         return "User with email " + email + " already exists in the database\n", 400
     userService.create_user(email, password)
-    return "User created", 200
+    return "User created", 201
 
 
 @user_bp.route('/login', methods=['POST'])
@@ -32,8 +33,6 @@ def log_in():
     data = request.get_json()
     email = data["email"]
     password = data["password"]
-    print("LOG IN EMAIL:\t", email)
-    print("LOG IN PASSWORD:\t", password)
     user_model = userService.get_user(email)
     if user_model is None:
         return "User with email " + email + " does not exist in the database\n", 404
@@ -41,4 +40,4 @@ def log_in():
         # TODO implement authentication for the front-end
         return "Logged in\n", 200
     else:
-        return "Incorrect password\n", 404
+        return "Incorrect password\n", 401

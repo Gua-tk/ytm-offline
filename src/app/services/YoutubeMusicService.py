@@ -25,7 +25,6 @@ class YoutubeMusicService:
         elif os.path.isfile(token_absolute_path):
             self.ytmusic = ytmusicapi.YTMusic(token_absolute_path)
 
-
     def upload_audio(self, audio_path):
         upload_info = self.ytmusic.upload_song(audio_path)
         return upload_info

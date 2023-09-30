@@ -4,7 +4,7 @@ from flask_restx import Api, Resource, fields
 from src.app.AppSingleton import auth
 from src.app.services.YoutubeService import YoutubeService
 
-youtube_bp = Blueprint('video', __name__, url_prefix='/api/youtube')
+youtube_bp = Blueprint('video', __name__, url_prefix='/api/video')
 api = Api(youtube_bp, doc='/doc', title='Video REST API', version='1.0')
 
 video_fields = api.model('Video', {

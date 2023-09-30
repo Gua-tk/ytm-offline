@@ -17,10 +17,9 @@ from src.app.AppSingleton import auth
 global_bp = Blueprint('global', __name__, url_prefix='/api/global')
 api = Api(global_bp, doc='/doc', title='Global REST API', version='1.0')
 
-videoService = YoutubeService()
+youtubeService = YoutubeService()
 compressionService = CompressionService()
-playlistService = YoutubeMusicService()
-
+youtubeMusicService = YoutubeMusicService()
 userService = UserService()
 
 root_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -38,7 +37,7 @@ def download_playlist():
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
-    directory_name = videoService.download_audio_playlist(playlist_url, current_download_path)
+    directory_name = youtubeService.download_audio_playlist(playlist_url, current_download_path)
     print("Directory name for playlist is " + directory_name)
     compressionService.zip_folder(os.path.join(current_download_path, directory_name),
                                   os.path.join(current_download_path, directory_name + ".zip"))
@@ -52,7 +51,7 @@ def download_audio():
     audio_url = data['audio_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "audios", str(request_uuid))
-    file_name = videoService.download_audio(audio_url, current_download_path)
+    file_name = youtubeService.download_audio(audio_url, current_download_path)
     return send_file(os.path.join(current_download_path, file_name), as_attachment=True)
 
 
@@ -63,8 +62,8 @@ def upload_audio():
     audio_url = data['audio_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "audios", str(request_uuid))
-    file_name = videoService.download_audio(audio_url, current_download_path)
-    return str(playlistService.upload_audio(os.path.join(current_download_path, file_name)))
+    file_name = youtubeService.download_audio(audio_url, current_download_path)
+    return str(youtubeMusicService.upload_audio(os.path.join(current_download_path, file_name)))
 
 
 @global_bp.route('/uploadPlaylist', methods=['POST'])
@@ -74,9 +73,9 @@ def upload_playlist():
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
-    directory_name = videoService.download_audio_playlist(playlist_url, current_download_path)
+    directory_name = youtubeService.download_audio_playlist(playlist_url, current_download_path)
     print("DOWNLOADING FINISHED. STARTING UPLOAD<")
-    upload_infos = playlistService.upload_playlist(os.path.join(current_download_path, directory_name))
+    upload_infos = youtubeMusicService.upload_playlist(os.path.join(current_download_path, directory_name))
     return "".join(str(upload_infos)) + "\n"
 
 
@@ -98,10 +97,10 @@ def upload_to_playlist():
     playlist_url = data['playlist_url']
     request_uuid = uuid.uuid4()
     current_download_path = os.path.join(download_path, "playlists", str(request_uuid))
-    directory_name = playlistService.download_audio_playlist(playlist_url, current_download_path)
-    upload_infos = playlistService.upload_playlist(os.path.join(current_download_path, directory_name))
-    title, description = playlistService.download_playlist_data(playlist_url)
-    playlistService.save_playlist({'title': title, 'description': description})
+    directory_name = youtubeMusicService.download_audio_playlist(playlist_url, current_download_path)
+    upload_infos = youtubeMusicService.upload_playlist(os.path.join(current_download_path, directory_name))
+    title, description = youtubeMusicService.download_playlist_data(playlist_url)
+    youtubeMusicService.save_playlist({'title': title, 'description': description})
 
 
 @global_bp.route('/secure_hello', methods=['GET'])
