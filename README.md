@@ -305,43 +305,43 @@ The development of the ***YouTube Music Manager*** backend was possible thanks t
 [codacy-shield]: https://app.codacy.com/project/badge/Grade/8fb86f373fde43ebb38042da3f3b49a8
 [codacy-url]: https://app.codacy.com/gh/ytm-manager/ytm-manager-backend/dashboard
 
-[language-shield]: https://img.shields.io/github/languages/top/ytm-manager/ytm-manager-backend?style=flat-square&color=yellow&logo=oracle
+[language-shield]: https://img.shields.io/github/languages/top/ytm-manager/ytm-manager-backend?color=yellow&logo=python
 [language-url]: https://www.python.org/
 
-[language-count-shield]: https://img.shields.io/github/languages/count/ytm-manager/ytm-manager-backend?style=flat-square&color=red&logo=github
+[language-count-shield]: https://img.shields.io/github/languages/count/ytm-manager/ytm-manager-backend?color=red&logo=github
 [language-count-url]: https://github.com/ytm-manager/ytm-manager-backend
 
-[license-shield]: https://img.shields.io/github/license/ytm-manager/ytm-manager-backend?style=flat-square&color=darkgreen&logo=gnu
+[license-shield]: https://img.shields.io/github/license/ytm-manager/ytm-manager-backend?color=darkgreen&logo=gnu
 [license-url]: https://github.com/ytm-manager/ytm-manager-backend/blob/master/LICENSE
 
 [loc-shield]: https://img.shields.io/tokei/lines/github/ytm-manager/ytm-manager-backend
 [loc-url]: https://github.com/ytm-manager/ytm-manager-backend
 
-[last-commit-shield]: https://img.shields.io/github/last-commit/ytm-manager/ytm-manager-backend/master?style=flat-square&logo=github
+[last-commit-shield]: https://img.shields.io/github/last-commit/ytm-manager/ytm-manager-backend/master?logo=github
 [last-commit-url]: https://github.com/ytm-manager/ytm-manager-backend/issues
 
-[commit-activity-shield]: https://img.shields.io/github/commit-activity/y/ytm-manager/ytm-manager-backend?style=flat-square&color=black&logo=github
+[commit-activity-shield]: https://img.shields.io/github/commit-activity/y/ytm-manager/ytm-manager-backend?color=black&logo=github
 [commit-activity-url]: https://github.com/ytm-manager/ytm-manager-backend/graphs/commit-activity
 
-[docker-size-shield]: https://img.shields.io/docker/image-size/aleixmt/ytm-manager-backend/latest?style=flat-square&color=purple&logo=docker
+[docker-size-shield]: https://img.shields.io/docker/image-size/aleixmt/ytm-manager-backend/latest?color=purple&logo=docker
 [docker-size-url]: https://hub.docker.com/r/aleixmt/ytm-manager-backend
 
-[repo-size-shield]: https://img.shields.io/github/repo-size/ytm-manager/ytm-manager-backend?style=flat-square&logo=github
+[repo-size-shield]: https://img.shields.io/github/repo-size/ytm-manager/ytm-manager-backend?logo=github
 [repo-size-url]: https://github.com/ytm-manager/ytm-manager-backend
 
-[website-documentation-shield]: https://img.shields.io/website?url=https%3A%2F%2Fytm-manager.github.io%2F&style=flat-square&logo=jekyll&label=Documentation%20website
+[website-documentation-shield]: https://img.shields.io/website?url=https%3A%2F%2Fytm-manager.github.io%2F&logo=jekyll&label=Documentation%20website
 [website-documentation-url]: https://ytm-manager.github.io/
 
-[website-shield]: https://img.shields.io/website?url=https%3A%2F%2Fytm-manager.com&style=flat-square&logo=icinga&label=ytm-manager%20website
+[website-shield]: https://img.shields.io/website?url=https%3A%2F%2Fytm-manager.com&logo=icinga&label=ytm-manager%20website
 [website-url]: https://ytm-manager.com
 
-[CD-CI-pipeline-shield]: https://img.shields.io/github/actions/workflow/status/ytm-manager/ytm-manager-backend/build.yml?style=flat-square&logo=docker&label=CD%20CI%20pipeline
+[CD-CI-pipeline-shield]: https://img.shields.io/github/actions/workflow/status/ytm-manager/ytm-manager-backend/build.yml?logo=docker&label=CD%20CI%20pipeline
 [CD-CI-pipeline-url]: https://github.com/ytm-manager/ytm-manager-backend/actions/workflows/build.yml
 
 [coverage-shield]: https://img.shields.io/codecov/c/github/ytm-manager/ytm-manager-backend/master?logo=codecov
 [coverage-url]: https://app.codecov.io/gh/ytm-manager/ytm-manager-backend
 
-[forks-shield]: https://img.shields.io/github/forks/ytm-manager/ytm-manager-backend.svg?style=flat-square&label=Forks&maxAge=2592000&color=red
+[forks-shield]: https://img.shields.io/github/forks/ytm-manager/ytm-manager-backend.svg?label=Forks&maxAge=2592000&color=red
 [forks-url]: https://github.com/ytm-manager/ytm-manager-backend/network/members
 
 
@@ -352,7 +352,7 @@ The development of the ***YouTube Music Manager*** backend was possible thanks t
 
 
 <!-- Shield technologies -->
-[python-shield]: https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python&logoColor=white
+[python-shield]: https://img.shields.io/badge/python-3.8.10-blue?style=for-the-badge&logo=python
 [python-url]: https://www.python.org
 [git-shield]: https://img.shields.io/badge/git-2.25.1-black?style=for-the-badge&logo=git
 [git-url]: https://git.com
